@@ -1,3 +1,4 @@
+/* eslint-disable no-irregular-whitespace */
 import { useState } from 'react';
 import { Search, Package,DollarSign, Star,Send, Truck, RefreshCw, FileText, MessageSquare, Bell } from 'lucide-react';
 import CreateConsignmentOffer from './createConsignment';
@@ -7,6 +8,7 @@ import AgreementFinalization from './Finalization';
 import ConsignmentExecution from './Execution';
 import SalesSettlement from './Settlement';
 import ReturnRenewalExit from './Conclusion';
+import logo from '../../assets/logo.png';
 
 const ConsigneeDiscovery = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -185,9 +187,11 @@ const DKCPlatform = () => {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-8">
-              <span className="text-xl font-bold text-blue-400">DKC B2B</span>
+              <span className="text-xl font-bold text-blue-400"><img src={logo} alt="logo" width={35}  height={35}/></span>
             </div>
-
+             <div>
+                <h2>DKC B2B Integrated Consignment Trading Portal Framework</h2>
+             </div>
             <div className="flex items-center space-x-4">
               <button className="relative p-2 text-gray-400 hover:text-white">
                 <Bell size={20} />
