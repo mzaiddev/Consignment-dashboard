@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import { Package, Clock, DollarSign, Send, ChevronRight } from 'lucide-react';
-import ConsigneeGuarantee from './terms-condition';
+import ConsignorGuarantee from './terms-condition';
 
 const CreateConsignmentOffer = () => {
-  // Form state
-//   const [selectedArtisan, setSelectedArtisan] = useState(null);
   const [offerDetails, setOfferDetails] = useState({
     quantity: '',
     pricePerUnit: '',
@@ -15,7 +13,6 @@ const CreateConsignmentOffer = () => {
   });
   const [currentStep, setCurrentStep] = useState(1);
 
-  // Selected artisan details (would come from previous discovery step)
   const artisanDetails = {
     id: 'CON001',
     name: 'Kashmir Heritage Artisans',
@@ -137,9 +134,9 @@ const CreateConsignmentOffer = () => {
                 onChange={(e) => setOfferDetails({...offerDetails, commission: e.target.value})}
                 className="w-full bg-gray-700 rounded-lg p-3"
               >
-                <option value="25">25% - Standard Rate</option>
-                <option value="20">20% - Bulk Order Rate</option>
-                <option value="15">15% - Premium Partner Rate</option>
+                <option value="25">55% - Standard Rate</option>
+                <option value="20">45% - Bulk Order Rate</option>
+                <option value="15">35% - Premium Partner Rate</option>
               </select>
             </div>
           </div>
@@ -156,9 +153,8 @@ const CreateConsignmentOffer = () => {
                 onChange={(e) => setOfferDetails({...offerDetails, paymentTerms: e.target.value})}
                 className="w-full bg-gray-700 rounded-lg p-3"
               >
-                <option value="escrow_30">30% Escrow, 70% on Delivery</option>
-                <option value="escrow_50">50% Escrow, 50% on Delivery</option>
-                <option value="full_escrow">100% Escrow</option>
+                <option value="escrow_30">After Sale</option>
+                <option value="escrow_50">Negotiable</option>
               </select>
             </div>
 
@@ -188,7 +184,7 @@ const CreateConsignmentOffer = () => {
         {currentStep === 2 && (
                   <div className="bg-gray-800 rounded-xl p-6 space-y-6 mt-6">
                     <h3 className="text-lg font-semibold mb-4">Platform Terms & Conditions</h3>
-                  <ConsigneeGuarantee/>
+                  <ConsignorGuarantee/>
                   </div>
                 )}
 

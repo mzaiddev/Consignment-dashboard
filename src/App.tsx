@@ -5,7 +5,7 @@ function App() {
   const user = "x";
 
   return (
-     user === "x" ? <DKCPlatform/>: <ConsigneePlatform/> 
+     user === "x" ?<ConsigneePlatform/>:<DKCPlatform/>
       
     
   )

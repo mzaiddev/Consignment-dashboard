@@ -1,3 +1,4 @@
+/* eslint-disable no-irregular-whitespace */
 import { useState } from 'react';
 import { Search, Package,DollarSign, Star,Send, Truck, RefreshCw, FileText, MessageSquare, Bell } from 'lucide-react';
 import CreateConsignmentOffer from './CreateConsignmentOffer';
@@ -156,8 +157,8 @@ const Conclusion = () => (
    <ReturnRenewalExit/>
 );
 
-// Main Platform Component
-const ConsigneePlatform = () => {
+
+const ConsigneeDashboard = () => {
   // Core state
   const [activeStep, setActiveStep] = useState('discovery');
   const [currentUser] = useState({
@@ -168,16 +169,16 @@ const ConsigneePlatform = () => {
   const [notifications] = useState([]);
 
   // Workflow steps
-  const workflowSteps = [
-    { id: 'discovery', label: 'Discover Consignor', icon: Search, component: ConsigneeDiscovery },
-    { id: 'create-offer', label: 'Create Consignor Offer', icon: Send, component: CreateOffer },
-    { id: 'negotiate', label: 'Review & Negotiate  Offer', icon: MessageSquare, component: Negotiations },
-    { id: 'submit', label: 'Submit Offer', icon: Package, component: SubmitOffer },
-    { id: 'finalize', label: 'Finalize Offer', icon: FileText, component: Finalization },
-    { id: 'execute', label: 'Consignment Execution', icon: Truck, component: Execution },
-    { id: 'settlement', label: 'Sales Settlement', icon: DollarSign, component: Settlement },
-    { id: 'conclude', label: 'Return, Renewal & Exit', icon: RefreshCw, component: Conclusion }
-  ];
+    const workflowSteps = [
+      { id: 'discovery', label: 'Discover Consignor', icon: Search, component: ConsigneeDiscovery },
+      { id: 'create-offer', label: 'Create Consignor Offer', icon: Send, component: CreateOffer },
+      { id: 'negotiate', label: 'Review & Negotiate  Offer', icon: MessageSquare, component: Negotiations },
+      { id: 'submit', label: 'Submit Offer', icon: Package, component: SubmitOffer },
+      { id: 'finalize', label: 'Finalize Offer', icon: FileText, component: Finalization },
+      { id: 'execute', label: 'Consignment Execution', icon: Truck, component: Execution },
+      { id: 'settlement', label: 'Sales Settlement', icon: DollarSign, component: Settlement },
+      { id: 'conclude', label: 'Return, Renewal & Exit', icon: RefreshCw, component: Conclusion }
+    ];
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
@@ -187,23 +188,10 @@ const ConsigneePlatform = () => {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-8">
               <span className="text-xl font-bold text-blue-400"><img src={logo} alt="logo" width={35}  height={35}/></span>
-              <nav className="hidden md:flex space-x-4">
-                {workflowSteps.map(step => (
-                  <button
-                    key={step.id}
-                    onClick={() => setActiveStep(step.id)}
-                    className={`px-3 py-2 rounded-md text-sm font-medium ${
-                      activeStep === step.id
-                        ? 'bg-gray-900 text-white'
-                        : 'text-gray-300 hover:bg-gray-700'
-                    }`}
-                  >
-                    {step.label}
-                  </button>
-                ))}
-              </nav>
             </div>
-
+             <div>
+                <h2 className= " text-2xl"><span style={{color:'#ef6d1c'}} >Consignee</span>-DKC B2B Integrated Consignment Trading Portal Framework</h2>
+             </div>
             <div className="flex items-center space-x-4">
               <button className="relative p-2 text-gray-400 hover:text-white">
                 <Bell size={20} />
@@ -229,13 +217,14 @@ const ConsigneePlatform = () => {
             {workflowSteps.map((step, index) => (
               <div 
                 key={step.id}
-                className={`flex flex-col items-center ${
+                className={`flex flex-col items-center cursor-pointer ${
                   index < workflowSteps.findIndex(s => s.id === activeStep)
                     ? 'text-green-400'
                     : index === workflowSteps.findIndex(s => s.id === activeStep)
                     ? 'text-blue-400'
                     : 'text-gray-400'
                 }`}
+                onClick={() => setActiveStep(step.id)}
               >
                 <step.icon size={20} />
                 <span className="text-xs mt-1">{step.label}</span>
@@ -257,4 +246,4 @@ const ConsigneePlatform = () => {
   );
 };
 
-export default  ConsigneePlatform;
+export default ConsigneeDashboard;

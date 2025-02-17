@@ -190,7 +190,7 @@ const DKCPlatform = () => {
               <span className="text-xl font-bold text-blue-400"><img src={logo} alt="logo" width={35}  height={35}/></span>
             </div>
              <div>
-                <h2>DKC B2B Integrated Consignment Trading Portal Framework</h2>
+                <h2 className= " text-2xl"><span style={{color:'#ef6d1c'}} >Consigner</span>-DKC B2B Integrated Consignment Trading Portal Framework</h2>
              </div>
             <div className="flex items-center space-x-4">
               <button className="relative p-2 text-gray-400 hover:text-white">
