@@ -1,29 +1,50 @@
-import  { useState } from 'react';
-import { Mail, Lock, User } from 'lucide-react';
+import React, { useState } from 'react';
+import { Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const AuthSystemPreview = () => {
-  const [currentView, setCurrentView] = useState('login'); // login, otp, dashboard
+  const [currentView, setCurrentView] = useState('login'); 
   const [role, setRole] = useState('consignee');
-  
-  // Sample form data
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
+  const navigate = useNavigate();
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const dummyData = {
+    consignor: {
+      email: 'consignor@example.com',
+      password: 'consignor123',
+      otp: '123456',
+    },
+    consignee: {
+      email: 'consignee@example.com',
+      password: 'consignee123',
+      otp: '123456',
+    },
+  };
 
   const handleLoginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (email && password) {
+    if (
+      (role === 'consignor' && email === dummyData.consignor.email && password === dummyData.consignor.password) ||
+      (role === 'consignee' && email === dummyData.consignee.email && password === dummyData.consignee.password)
+    ) {
       setCurrentView('otp');
     }
   };
-  
+
   const handleOtpSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (otp.join('').length === 6) {
-      setCurrentView('dashboard');
+    const enteredOtp = otp.join('');
+    if (
+      (role === 'consignor' && enteredOtp === dummyData.consignor.otp) ||
+      (role === 'consignee' && enteredOtp === dummyData.consignee.otp)
+    ) {
+      navigate(`/${role}`);
     }
   };
-  
+
   const handleOtpChange = (index: number, value: string) => {
     if (value.length <= 1) {
       const newOtp = [...otp];
@@ -31,14 +52,17 @@ const AuthSystemPreview = () => {
       setOtp(newOtp);
     }
   };
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
 
-  
+
   return (
     <div className="min-h-screen bg-gray-950 flex justify-center items-center p-4">
       {currentView === 'login' && (
         <div className="w-full max-w-md">
           <div className="text-center mb-6">
-            <h1 className="text-3xl font-bold text-white mb-2"> DKC Consignment Portal</h1>
+            <h1 className="text-3xl font-bold text-white mb-2">DKC Consignment Portal</h1>
             <p className="text-gray-400">Secure access for consignees and consignors</p>
           </div>
           
@@ -105,13 +129,20 @@ const AuthSystemPreview = () => {
                         <Lock size={18} />
                       </div>
                       <input
-                        type="password"
+                        type={passwordVisible ? 'text' : 'password'}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Password"
                         required
                         className="w-full bg-gray-800 border border-gray-700 rounded-lg py-2 pl-10 pr-4 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />
+                       <button
+                        type="button"
+                        className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
+                        onClick={togglePasswordVisibility}
+                      >
+                        {passwordVisible ? <EyeOff size={18} /> : <Eye size={18} />}
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -139,6 +170,10 @@ const AuthSystemPreview = () => {
                 >
                   Sign In
                 </button>
+                <div className="mt-4 text-gray-400 text-sm">
+                  <p>Consignor: consignor@example.com / consignor123</p>
+                  <p>Consignee: consignee@example.com / consignee123</p>
+                </div>
               </div>
             </form>
           </div>
@@ -189,6 +224,10 @@ const AuthSystemPreview = () => {
               >
                 Resend Code
               </button>
+              <div className="mt-4 text-gray-400 text-sm">
+                  <p>OTP: 123456</p>
+                 
+                </div>
             </div>
           </form>
         </div>

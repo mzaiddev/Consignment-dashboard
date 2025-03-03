@@ -7,7 +7,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/consigner" element={<DKCPlatform />} />
+        <Route path="/consignor" element={<DKCPlatform />} />
         <Route path="/consignee" element={<ConsigneePlatform />} />
         <Route path="/" element={<AuthSystemPreview/>}/>
       </Routes>
