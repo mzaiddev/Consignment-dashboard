@@ -37,7 +37,7 @@ const handleChange = (e: ChangeEvent) => {
 
   return (
     <div className="max-w-5xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-8">
-      <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+      <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
         Consignee Guarantee & Exclusive Authorization Statement
       </h2>
 
