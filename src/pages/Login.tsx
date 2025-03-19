@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const AuthSystemPreview = () => {
   const [currentView, setCurrentView] = useState('login'); 
@@ -173,6 +173,7 @@ const AuthSystemPreview = () => {
                 <div className="mt-4 text-gray-400 text-sm">
                   <p>Consignor: consignor@example.com / consignor123</p>
                   <p>Consignee: consignee@example.com / consignee123</p>
+                 <Link to='/admin'>Admin Dashboard</Link>  
                 </div>
               </div>
             </form>
