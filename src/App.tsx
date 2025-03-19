@@ -11,7 +11,7 @@ function App() {
         <Route path="/consignor" element={<DKCPlatform />} />
         <Route path="/consignee" element={<ConsigneePlatform />} />
         <Route path="/" element={<AuthSystemPreview/>}/>
-        <Route path='/admin' element={<ConsignmentDashboard/>} />
+        <Route path="/admin" element={<ConsignmentDashboard/>} />
       </Routes>
     </Router>
   );
