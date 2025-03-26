@@ -69,10 +69,32 @@ const ConsigneeDiscovery = () => {
       </div>
 
       {/* Results Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {consignors.map(consignor => (
           <ConsignorCard key={consignor.id} consignor={consignor} />
         ))}
+      </div>
+
+      {/* Responsive alternative to tables */}
+      <div className="grid grid-cols-1 gap-4 sm:hidden">
+        {consignors.map(item => (
+          <div key={item.id} className="bg-gray-800 p-4 rounded-lg">
+            <div className="grid grid-cols-2 gap-2">
+              <span className="text-gray-400">ID:</span>
+              <span>{item.id}</span>
+              <span className="text-gray-400">Name:</span>
+              <span>{item.name}</span>
+              {/* More fields */}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Regular table for larger screens */}
+      <div className="hidden sm:block">
+        <table className="min-w-full">
+          {/* Table content */}
+        </table>
       </div>
     </div>
   );
@@ -109,7 +131,7 @@ const ConsignorCard = ({ consignor }: { consignor: Consignor }) => (
         {consignor.specialties.map((specialty, index) => (
           <span 
             key={index}
-            className="px-3 py-1 bg-gray-700 rounded-full text-sm"
+            className="px-3 py-1 bg-gray-700 rounded-full text-sm text-center"
           >
             {specialty}
           </span>
@@ -158,7 +180,7 @@ const Conclusion = () => (
 );
 
 
-const DKCPlatform = () => {
+const ConsignorDashboard = () => {
   // Core state
   const [activeStep, setActiveStep] = useState('discovery');
   const [currentUser] = useState({
@@ -183,15 +205,20 @@ const DKCPlatform = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       {/* Header */}
-      <header className="bg-gray-800 border-b border-gray-700">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-8">
-              <span className="text-xl font-bold text-blue-400"><img src={logo} alt="logo" width={35}  height={35}/></span>
+      <header className="bg-gray-800 border-b border-gray-700 py-3 px-2">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col sm:flex-row items-center gap-2">
+            <div className="flex items-center space-x-2">
+              <span className="text-xl font-bold text-blue-400">
+                <img src={logo} alt="logo" width={35} height={35} />
+              </span>
             </div>
-             <div>
-                <h2 className= " text-2xl"><span style={{color:'#ef6d1c'}} >Consignor</span>-DKC B2B Integrated Consignment Trading Portal Framework</h2>
-             </div>
+            <div className="flex-1 text-center">
+              <h2 className="text-xs sm:text-sm md:text-lg lg:text-2xl">
+                <span style={{ color: '#ef6d1c' }}>Consignor</span>
+                <span className="hidden xs:inline">-DKC B2B Integrated Consignment Trading Portal Framework</span>
+              </h2>
+            </div>
             <div className="flex items-center space-x-4">
               <button className="relative p-2 text-gray-400 hover:text-white">
                 <Bell size={20} />
@@ -199,7 +226,7 @@ const DKCPlatform = () => {
                   <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-400" />
                 )}
               </button>
-              <div className="flex items-center space-x-2">
+              <div className="hidden sm:flex items-center space-x-2">
                 <div className="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center">
                   <span className="font-semibold">{currentUser.name[0]}</span>
                 </div>
@@ -211,13 +238,13 @@ const DKCPlatform = () => {
       </header>
 
       {/* Progress Tracker */}
-      <div className="bg-gray-800 border-b border-gray-700">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
+      <div className="bg-gray-800 border-b border-gray-700 overflow-x-auto">
+        <div className="max-w-7xl mx-auto px-2 py-4">
+          <div className="flex items-center gap-4 min-w-max">
             {workflowSteps.map((step, index) => (
-              <div 
+              <div
                 key={step.id}
-                className={`flex flex-col items-center cursor-pointer ${
+                className={`flex flex-col items-center cursor-pointer px-2 ${
                   index < workflowSteps.findIndex(s => s.id === activeStep)
                     ? 'text-green-400'
                     : index === workflowSteps.findIndex(s => s.id === activeStep)
@@ -226,8 +253,10 @@ const DKCPlatform = () => {
                 }`}
                 onClick={() => setActiveStep(step.id)}
               >
-                <step.icon size={20} />
-                <span className="text-xs mt-1">{step.label}</span>
+                <div className="p-1.5 rounded-full hover:bg-gray-700">
+                  <step.icon size={18} />
+                </div>
+                <span className="hidden sm:block text-xs mt-1 text-center whitespace-nowrap">{step.label}</span>
               </div>
             ))}
           </div>
@@ -246,4 +275,4 @@ const DKCPlatform = () => {
   );
 };
 
-export default DKCPlatform;
+export default ConsignorDashboard;
